@@ -10,8 +10,8 @@
 
         if (!btn) return;
 
-        const pauseIcon = btn.querySelector('.ph-pause-circle').closest('.icon-color');
-        const playIcon = btn.querySelector('.ph-play-circle').closest('.icon-color');
+        const pauseIcon = btn.querySelector('.ph-pause').closest('.icon-color');
+        const playIcon = btn.querySelector('.ph-play').closest('.icon-color');
 
         const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         let playing = !reducedMotion;
