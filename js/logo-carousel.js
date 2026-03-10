@@ -6,34 +6,40 @@
 
     document.addEventListener('DOMContentLoaded', function () {
         const wrapper = document.querySelector('.logo-carousel_track-wrapper');
-        const btn = document.getElementById('logo-carousel-toggle');
+        const toggleBtn = document.getElementById('logo-carousel-toggle');
+        const pauseBtn = document.getElementById('pause');
+        const playBtn = document.getElementById('play');
 
-        if (!btn) return;
+        if (!pauseBtn || !playBtn) return;
 
-        const pauseIcon = document.getElementById('pause')?.closest('.icon-color');
-        const playIcon = document.getElementById('play')?.closest('.icon-color');
-
+        // Respect reduced motion
         const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         let playing = !reducedMotion;
 
         function updateState() {
             if (playing) {
                 wrapper.style.animationPlayState = 'running';
-                pauseIcon.style.display = '';
-                playIcon.style.display = 'none';
-                btn.setAttribute('aria-label', 'Pause logo carousel');
+                pauseBtn.style.display = '';
+                playBtn.style.display = 'none';
+                if (toggleBtn) toggleBtn.setAttribute('aria-label', 'Pause logo carousel');
             } else {
                 wrapper.style.animationPlayState = 'paused';
-                pauseIcon.style.display = 'none';
-                playIcon.style.display = '';
-                btn.setAttribute('aria-label', 'Play logo carousel');
+                pauseBtn.style.display = 'none';
+                playBtn.style.display = '';
+                if (toggleBtn) toggleBtn.setAttribute('aria-label', 'Play logo carousel');
             }
         }
 
+        // Set initial state
         updateState();
 
-        btn.addEventListener('click', function () {
-            playing = !playing;
+        pauseBtn.addEventListener('click', function () {
+            playing = false;
+            updateState();
+        });
+
+        playBtn.addEventListener('click', function () {
+            playing = true;
             updateState();
         });
     });
