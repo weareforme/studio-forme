@@ -136,27 +136,19 @@
 
         gsap.registerPlugin(ScrollTrigger);
 
-        gsap.from(".header", {
-            autoAlpha: 0,
-            duration: 0.5,
-            delay: 2,
-            ease: "power2.inOut",
-            onComplete: function () {
-                let lastDirection = 0;
+        let lastDirection = 0;
 
-                ScrollTrigger.create({
-                    start: "top -100",
-                    onUpdate: function (self) {
-                        if (self.direction !== lastDirection) {
-                            lastDirection = self.direction;
-                            gsap.to(".header", {
-                                yPercent: self.direction === 1 ? -100 : 0,
-                                duration: 0.3,
-                                ease: "power2.out",
-                            });
-                        }
-                    },
-                });
+        ScrollTrigger.create({
+            start: "top -100",
+            onUpdate: function (self) {
+                if (self.direction !== lastDirection) {
+                    lastDirection = self.direction;
+                    gsap.to(".header", {
+                        yPercent: self.direction === 1 ? -100 : 0,
+                        duration: 0.3,
+                        ease: "power2.out",
+                    });
+                }
             },
         });
 
